@@ -20,6 +20,8 @@ debes mencionarla para que haskell pueda analizar y hacer coincidir los patrones
 
 sumarList :: [Float] -> [Float] -> [Float]
 sumarList [] [] = []
+sumarList ys [] = ys --Otro caso base, en caso de que una lista no este vacia
+sumarList [] ys = ys --Otro caso base
 sumarList (x:xs) (c:cs) = (x + c) : sumarList xs cs
 
 --Funcion para sumar matrices
