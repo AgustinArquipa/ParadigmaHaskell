@@ -2,7 +2,7 @@ doble :: Float -> Float
 doble x = x + x
 
 suma :: Int -> Int -> Int
-suma x y = x + y
+suma x y = x - y
 
 positivo :: Int -> Bool
 positivo x = x > 0 

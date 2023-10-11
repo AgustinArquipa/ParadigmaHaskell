@@ -6,6 +6,7 @@ elimina todas las apariciones de cualquier caracter de la primera cadena en la s
 import System.Random
 import Data.Hashable
 
+
 --Para elegir un caracter random vamos a elejir un indice random pasado de una cadena y con !! devolvemos esa posicion
 posicionAleatoria :: String -> Int
 posicionAleatoria cad =
@@ -136,8 +137,8 @@ f2 x = exp x - log (x + 4)
 
 biseccion :: (Double -> Double) -> (Double, Double) -> Double -> Double
 biseccion f2 (a, b) epsilon
- | fa * fb > 0 = Error "No cumple condicion"
- | abs (fc) <= epsilon =  c
+ | fa * fb > 0 = error "No cumple condicion"
+ | abs fc <= epsilon =  c
  | fa * fc < 0 = biseccion f2 (a, c) epsilon
  | otherwise = biseccion f2 (c, b) epsilon
  where
@@ -145,3 +146,29 @@ biseccion f2 (a, b) epsilon
     fb = f2 b
     fc = f2 c
     c = (a + b) / 2
+
+--Metodo de biseccion 2 que devuelve una tupla
+biseccion2 :: (Double -> Double) -> (Double, Double) -> Double -> (Double, Int)
+biseccion2 f2 (a, b) epsilon = biseccion2' f (a, b) epsilon 0
+ where
+    biseccion2' f (a, b) epsilon iter
+     | fa * fb > 0 = error "No cumple condicion"
+     | abs fc <= epsilon =  (c, iter)
+     | fa * fc < 0 = biseccion2' f2 (a, c) epsilon (iter + 1)
+     | otherwise = biseccion2' f2 (c, b) epsilon (iter + 1)
+     where
+        fa = f2 a
+        fb = f2 b
+        fc = f2 c
+        c = (a + b) / 2
+
+aplica :: (a -> b) -> [a] -> [b]
+--Funcion de a hacia b, donde [a] dominio y [b] codominio es el famoso MAP
+aplica _ [] = []
+aplica f (x:xs) = f x : aplica f xs
+
+filtra :: (a -> Bool) -> [a] -> [b] --Filtra equivale al filter
+filtra - [] = []
+filtra fb (x:xs)
+ | f x = x : filtra xs
+ | otherwise = filtra xs
