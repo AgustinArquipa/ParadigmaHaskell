@@ -4,12 +4,14 @@ un escalar x una matriz
 -}
 {-# OPTIONS_GHC -Wno-incomplete-patterns #-}
 
+import Data.Char
+
 -- Una funcion auxiliar que multiplica cada elemento de la lista por escalar
 multList :: Float -> [Float] -> [Float]
 multList a = map (a *)
 
 multMatriz :: Float -> [[Float]] -> [[Float]]
-multMatriz 0 _ = error "escalar es nulo!" 
+multMatriz 0 _ = error "escalar es nulo!"
 multMatriz _ [] = [] -- Caso base: Multiplicar un escalar por una lista vacia
 multMatriz a (x:xs) = multList a x : multMatriz a xs
 
@@ -28,3 +30,15 @@ sumarList (x:xs) (c:cs) = (x + c) : sumarList xs cs
 sumarMatrices :: [[Float]] -> [[Float]] -> [[Float]]
 sumarMatrices [] [] = []
 sumarMatrices (x:xs) (c:cs) = sumarList x c : sumarMatrices xs cs
+
+--Ejercicio de cadena
+
+cadena2NumAux :: String -> String --Metodo auxiliar que me devuelve la cadena
+cadena2NumAux [] = []
+cadena2NumAux (x:xs)
+ | isDigit x = x : cadena2NumAux xs
+ | otherwise = cadena2NumAux xs
+
+cadena2Num :: String -> Int --Ahora simplemente reutilizo el codigo anterior y lo paso a numero
+cadena2Num str = read (cadena2NumAux str)
+--El metodo read tranforma una cadena si es que contiene numero, a un string
