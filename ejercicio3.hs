@@ -2,7 +2,6 @@
 Limpiar :: String -> String -> String 
 elimina todas las apariciones de cualquier caracter de la primera cadena en la segunda 
 -}
-{-# OPTIONS_GHC -Wno-incomplete-patterns #-}
 import System.Random
 import Data.Hashable
 
@@ -38,9 +37,9 @@ limpiar cad1 (c:xs)
  | c == caracterRandom cad1 = limpiar cad1 xs
  | otherwise = c : limpiar cad1 xs
 
- {- diff :: [Float] -> [Float] 
- Devuelve la diferencia de cada uno con el promedio general
- -}
+{- diff :: [Float] -> [Float] 
+Devuelve la diferencia de cada uno con el promedio general
+-}
 -- Las funciones sum y fromIntegral son metodos propios
 promedioGeneral :: [Float] -> Float
 promedioGeneral lis = sum lis / fromIntegral (length lis)
@@ -130,7 +129,7 @@ extremos n lista
 --Ejercicio practico Metodo Bisercion
 --Funciones como parametros
 f :: Double -> Double
-f x = (x ^ 2) - 4 --Funcion cuadratica
+f x = x ^ 2 - 4 --Funcion cuadratica
 
 f2 :: Double -> Double --Funcion exponencial
 f2 x = exp x - log (x + 4)
@@ -167,8 +166,8 @@ aplica :: (a -> b) -> [a] -> [b]
 aplica _ [] = []
 aplica f (x:xs) = f x : aplica f xs
 
-filtra :: (a -> Bool) -> [a] -> [b] --Filtra equivale al filter
-filtra - [] = []
-filtra fb (x:xs)
- | f x = x : filtra xs
- | otherwise = filtra xs
+filtra :: (a -> Bool) -> [a] -> [a] --Filtra equivale al filter
+filtra _ [] = []
+filtra f (x:xs)
+ | f x = x : filtra f xs
+ | otherwise = filtra f xs
