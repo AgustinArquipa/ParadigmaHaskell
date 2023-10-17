@@ -42,3 +42,30 @@ cadena2NumAux (x:xs)
 cadena2Num :: String -> Int --Ahora simplemente reutilizo el codigo anterior y lo paso a numero
 cadena2Num str = read (cadena2NumAux str)
 --El metodo read tranforma una cadena si es que contiene numero, a un string
+
+--resto :: Integer -> Integer -> Integer
+-- resto por resta recursiva
+resto :: Integer -> Integer -> Integer
+resto a b
+ | b == 0 = error "Divideno igual a cero."
+ | a < b = a
+ | otherwise = resto (a-b) b
+
+{-
+Cociente :: Integer -> Integer -> Integer
+cociente por resta recursiva
+-}
+cociente :: Integer -> Integer -> Integer
+cociente a b
+ | b == 0 = error "Dividendo igual a cero."
+ | a < b = 0
+ | otherwise = 1 + cociente (a-b) b
+
+{-
+sumatoria :: Integer -> Integer -> Integer
+retorna la sumatoria de un a -> b, chequear el intervalo
+-}
+sumatoria :: Integer -> Integer -> Integer
+sumatoria a b
+ | a > b = 0
+ | otherwise = a + sumatoria (a+1) b
