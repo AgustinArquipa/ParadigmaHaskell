@@ -67,5 +67,50 @@ retorna la sumatoria de un a -> b, chequear el intervalo
 -}
 sumatoria :: Integer -> Integer -> Integer
 sumatoria a b
- | a > b = 0
+ | a > b = 0 --Si a es mayor que b, la suma es 0
  | otherwise = a + sumatoria (a+1) b
+
+cantDigitos :: Integer -> Integer
+cantDigitos a
+ | a == 0 = 0
+ | otherwise = 1 + cantDigitos (a `div` 10)
+
+
+--La manera correcta para encontrar el maximo de una lista , sin usar la funcion mas
+{- 
+maximo :: [Integer] -> Integer
+maximo [] = error "Error lista vacia!"
+maximo [x] = x --Caso base: lista con un solo elemento, el maximo es ese elemento
+maximo (x:xs) = max x (maximo xs) 
+-}
+maximoLista :: Ord a => [a] -> a
+maximoLista [] = error "Lista vacia!"
+maximoLista [x] = x --Caso base
+maximoLista (x:xs) = maximo x (maximoLista xs) --Compara x con el maximo del resto de la lista
+--Funcion auxiliar para comparar dos elementos y devolver el maximo
+maximo a b
+ | a >= b = a
+ |otherwise = b
+
+--Funcion que dada una lista de enteros lo convierta a un solo numero
+digitos2Enteros :: [Integer] -> Integer
+digitos2Enteros lis = read (listaEnterosString lis)
+
+listaEnterosString :: [Integer] -> String --funcion auxiliar
+listaEnterosString = concatMap show
+
+--Funcion para saber si un elemento pertenece al conjunto
+pertenece :: Eq a => a -> [a] -> Bool
+pertenece _ [] = False  --Si la lista esta vacia, el elemento no esta
+pertenece e (x:xs)
+ | e == x = True
+ | otherwise = pertenece e xs
+
+--Funcion para sacar la interseccion de dos conjuntos
+interseccion :: Eq a => [a] -> [a] -> [a]
+interseccion [] _ = [] --Si la primer lista esta vacia
+interseccion _ [] = [] --Si la segunda lista esta vacia
+interseccion (x:xs) cs
+ | x `elem` cs = x : interseccion xs cs --Si x esta en cs, lo incluye en la lista
+ | otherwise = interseccion xs cs --sino lo sigue buscando
+
