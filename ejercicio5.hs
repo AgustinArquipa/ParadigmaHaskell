@@ -114,3 +114,9 @@ interseccion (x:xs) cs
  | x `elem` cs = x : interseccion xs cs --Si x esta en cs, lo incluye en la lista
  | otherwise = interseccion xs cs --sino lo sigue buscando
 
+{-
+Metodos para calcular la matriz transpuesta
+-}
+matrizTrans :: [[a]] -> [[a]]
+matrizTrans ([]:_) = [] --Si la primera fila esta vacia, termina la transposicion
+matrizTrans matriz = map head matriz : matrizTrans (map tail matriz)
